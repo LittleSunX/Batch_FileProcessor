@@ -12,11 +12,5 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
-logging:
-  level:
-    com.sun.service: error
-  file:
-    name: D:/test/log/file.log
-
 mybatis:
   mapper-locations: classpath:mapper/*.xml

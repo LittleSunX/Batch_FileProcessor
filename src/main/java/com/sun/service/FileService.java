@@ -15,7 +15,6 @@ import java.util.UUID;
 @Service
 public class FileService {
 
-    private static final int BATCH_SIZE = 1000; // 根据实际情况调整<EOF>
     private static final String END_OF_FILE = "<EOF>"; // 设置你的文件结束标识
 
     private static final Logger logger = LoggerFactory.getLogger(FileService.class);
@@ -47,11 +46,12 @@ public class FileService {
                 user.setAge(Integer.parseInt(fields[1].trim()));
                 user.setGender(fields[2].trim());
                 userMapper.insertOrUpdate(user);
-                logger.info("文件入库成功 user: {}", user.getUid());
             }
+            logger.info("用户文件入库成功");
         } catch (Exception e) {
-            // 处理失败，结束程序
             logger.error("处理文件失败: " + filePath, e);
+            logger.info("批量处理失败，请检查！");
+            // 处理失败，结束程序
             System.exit(0);
         }
     }
