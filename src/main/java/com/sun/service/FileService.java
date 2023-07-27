@@ -28,14 +28,16 @@ public class FileService {
         Path path = Paths.get(filePath);
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             String line;
+            int lineNumber = 0; // 新添加的行数计数器
             while ((line = reader.readLine()) != null) {
+                lineNumber++; // 每次读取新的一行，计数器加一
                 if (END_OF_FILE.equals(line.trim())) {
                     break;
                 }
 
                 String[] fields = line.split("\\|");
                 if (fields.length != 3) {
-                    logger.error("无效行: {}", line);
+                    logger.error("文件第" + lineNumber + "行存在错误数据: {}", line);
                     continue;
                 }
 
