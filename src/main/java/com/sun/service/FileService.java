@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.UUID;
 
 @Service
 public class FileService {
@@ -41,7 +40,6 @@ public class FileService {
                 }
 
                 User user = new User();
-                user.setUid(UUID.randomUUID().toString());
                 user.setName(fields[0].trim());
                 user.setAge(Integer.parseInt(fields[1].trim()));
                 user.setGender(fields[2].trim());
@@ -50,7 +48,7 @@ public class FileService {
             logger.info("用户文件入库成功");
         } catch (Exception e) {
             logger.error("处理文件失败: " + filePath, e);
-            logger.info("批量处理失败，请检查！");
+            logger.error("批量处理失败，请检查！");
             // 处理失败，结束程序
             System.exit(0);
         }
