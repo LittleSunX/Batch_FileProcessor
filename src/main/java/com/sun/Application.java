@@ -18,6 +18,14 @@ import java.util.List;
 public class Application implements CommandLineRunner {
     @Autowired
     private FileService fileService;
+    /**
+     * 路径
+     */
+    private static final String PATH = "D:" + File.separator + "test" + File.separator;
+    /**
+     * 文件名称
+     */
+    private static final String FILE_NAME = "file.txt";
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
@@ -39,7 +47,8 @@ public class Application implements CommandLineRunner {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
             date = formatter.format(yesterday);
         }
-        String filePath = "D:" + File.separator + "test" + File.separator + date + File.separator + "file.txt"; // 根据日期处理对应目录下的文件
+        //拼接路径 路径+日期+文件名
+        String filePath = PATH + date + File.separator + FILE_NAME;// 根据日期处理对应目录下的文件
         fileService.importUsersFromFile(filePath);
         logger.info("批量处理成功，结束批量");
         // 处理完文件后，结束程序
